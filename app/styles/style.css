@@ -11,3 +11,14 @@ body {
 }
 
 
+.svg-container {
+
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid black;
+
+  height: 1000px;  
+  width: 1000px;  
+
+
+}

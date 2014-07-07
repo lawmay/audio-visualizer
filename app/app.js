@@ -30,7 +30,7 @@ var createContextNodes = function(audio, context) {
 
   // create gain, filter and analyser nodes
   var gain = context.createGainNode();
-  gain.gain.value = 1;
+  gain.gain.value = 0.05;
   console.log(gain);
 
   // var filter = context.createBiquadFilter();
@@ -75,11 +75,38 @@ audio.src = 'https://s3-us-west-1.amazonaws.com/hr-mytunes/data/05+Hot+Like+Fire
 // var frequencyData = new Uint8Array(totalBars);  
 
 
+
+var h = 1000;
+var w = 1000;
+var myData = _.range(0, 200, 10);
+
+
 window.addEventListener('load', onLoad, false);
 
 function onLoad() {
 
-  audio.play();
+
+      var svg = d3
+        .select(".container")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h)
+        .attr("class", "svg-container")
+      ;
+
+      var rect = svg
+        .selectAll("rect")
+        .data(myData)
+        .enter()
+        .append("rect")
+        .attr('x',function(d, i) { return i * 30; } )
+        .attr("y", 200 )
+        .attr('width', 20 )
+        .attr("height", function(d) { return d; } );
+      ;
+
+
+  // audio.play();
 
 
 }

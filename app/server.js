@@ -7,3 +7,8 @@ server.use(express.static(__dirname));
 var port = process.env.PORT || 1111;
 
 server.listen(port);
+
+
+// app.get('/', );
+
+// res.redirect('/signup');
