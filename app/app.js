@@ -32,8 +32,8 @@ var createContextNodes = function(audio, context) {
 
   // create gain, filter and analyser nodes
   var gain = context.createGainNode();
-  // gain.gain.value = 0.05;
-  gain.gain.value = 0.5;
+  gain.gain.value = 0.05;
+  // gain.gain.value = 0.5;
   console.log(gain);
 
   // CREATE FILTER???
@@ -76,13 +76,22 @@ audio.src = 'https://s3-us-west-1.amazonaws.com/hr-mytunes/data/05+Hot+Like+Fire
 
 
 
-var totalBars = 20;
+var totalBars = 30;
 var frequencyData = new Uint8Array(totalBars);
 
 
-var h = 1000;
+var h = 400;
 var w = 1000;
-var myData = _.range(0, 200, 10);
+var myData = _.range(0, totalBars);
+
+var barWidth = 85;    // as a percentage
+var barScale = (barWidth/100);
+
+var yScale = d3
+  .scale.linear()
+  .domain([0, 255])   // domain is 0-255 according to the web audio api
+  .range([h, 0])      // 0 is second parameter to invert y-axis
+;
 
 
 window.addEventListener('load', onLoad, false);
@@ -91,11 +100,11 @@ function onLoad() {
 
 
   var svg = d3
-    .select(".container")
+    .select(".svg-container")
+    .attr("class", "svg-container")
     .append("svg")
     .attr("width", w)
     .attr("height", h)
-    .attr("class", "svg-container")
   ;
 
   var rect = svg
@@ -104,9 +113,10 @@ function onLoad() {
     .enter()
     .append("rect")
     .attr('x',function(d, i) { return i * 30; } )
-    .attr("y", 200 )
+    // .attr("y", 200 )
+    .attr('y',function(d, i) { return yScale(d); } )
     .attr('width', 20 )
-    .attr("height", function(d) { return d; } );
+    .attr("height", function(d) { return h - yScale(d); } )
   ;
 
   function renderFrame() {
@@ -116,9 +126,11 @@ function onLoad() {
     rect
       .data(frequencyData)
       .attr('x',function(d, i) { return i * 30; } )
-      .attr("y", 200 )
+      // .attr("y", 200 )
+      .attr('y',function(d, i) { return yScale(d); } )
       .attr('width', 20 )
-      .attr("height", function(d) { return d; } );
+      // .attr("height", function(d) { return d; } );
+      .attr("height", function(d) { return h - yScale(d); } )
     ;
   }
 
