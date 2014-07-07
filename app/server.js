@@ -9,6 +9,7 @@ var port = process.env.PORT || 1111;
 server.listen(port);
 
 
-// app.get('/', );
+server.get('/*', function(req, res) {
+  res.redirect('/');  
+});
 
-// res.redirect('/signup');
