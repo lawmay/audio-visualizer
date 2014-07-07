@@ -22,6 +22,8 @@ var createContextClass = function() {
   ;
 }
 
+var analyser;
+
 var createContextNodes = function(audio, context) {
 
 
@@ -30,20 +32,23 @@ var createContextNodes = function(audio, context) {
 
   // create gain, filter and analyser nodes
   var gain = context.createGainNode();
-  gain.gain.value = 0.05;
+  // gain.gain.value = 0.05;
+  gain.gain.value = 0.5;
   console.log(gain);
 
+  // CREATE FILTER???
   // var filter = context.createBiquadFilter();
   // filter.type = filter.LOWPASS;
   // filter.frequency.value = 10;
 
-  var analyser = context.createAnalyser();
+  // var analyser = context.createAnalyser();
+  analyser = context.createAnalyser();
 
   source.connect(analyser);
-  // analyser.connect(filter);
   analyser.connect(gain);
   gain.connect(context.destination);
 
+  // this probably won't work
   // source.connect(analyser.connect(gain.connect(context.destination)));
 
 };
@@ -71,9 +76,8 @@ audio.src = 'https://s3-us-west-1.amazonaws.com/hr-mytunes/data/05+Hot+Like+Fire
 
 
 
-
-// var frequencyData = new Uint8Array(totalBars);  
-
+var totalBars = 20;
+var frequencyData = new Uint8Array(totalBars);
 
 
 var h = 1000;
@@ -86,28 +90,41 @@ window.addEventListener('load', onLoad, false);
 function onLoad() {
 
 
-      var svg = d3
-        .select(".container")
-        .append("svg")
-        .attr("width", w)
-        .attr("height", h)
-        .attr("class", "svg-container")
-      ;
+  var svg = d3
+    .select(".container")
+    .append("svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("class", "svg-container")
+  ;
 
-      var rect = svg
-        .selectAll("rect")
-        .data(myData)
-        .enter()
-        .append("rect")
-        .attr('x',function(d, i) { return i * 30; } )
-        .attr("y", 200 )
-        .attr('width', 20 )
-        .attr("height", function(d) { return d; } );
-      ;
+  var rect = svg
+    .selectAll("rect")
+    .data(myData)
+    .enter()
+    .append("rect")
+    .attr('x',function(d, i) { return i * 30; } )
+    .attr("y", 200 )
+    .attr('width', 20 )
+    .attr("height", function(d) { return d; } );
+  ;
+
+  function renderFrame() {
+   requestAnimationFrame(renderFrame);
+   analyser.getByteFrequencyData(frequencyData);
+
+    rect
+      .data(frequencyData)
+      .attr('x',function(d, i) { return i * 30; } )
+      .attr("y", 200 )
+      .attr('width', 20 )
+      .attr("height", function(d) { return d; } );
+    ;
+  }
 
 
-  // audio.play();
-
+  audio.play();
+  renderFrame();
 
 }
 
