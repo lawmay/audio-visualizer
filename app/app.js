@@ -1,8 +1,13 @@
 console.log('start app.js');
 
+var configureNode = {
+
+  'gain': function(node) {
+    console.log('inside gain func');
+  }
 
 
-
+};
 
 
 // create new audio context
@@ -17,6 +22,32 @@ var createContextClass = function() {
   ;
 }
 
+var createContextNodes = function(audio, context) {
+
+
+  // create source node containing the audio element
+  var source = context.createMediaElementSource(audio);
+
+  // create gain, filter and analyser nodes
+  var gain = context.createGainNode();
+  gain.gain.value = 1;
+  console.log(gain);
+
+  // var filter = context.createBiquadFilter();
+  // filter.type = filter.LOWPASS;
+  // filter.frequency.value = 10;
+
+  var analyser = context.createAnalyser();
+
+  source.connect(analyser);
+  // analyser.connect(filter);
+  analyser.connect(gain);
+  gain.connect(context.destination);
+
+  // source.connect(analyser.connect(gain.connect(context.destination)));
+
+};
+
 var contextClass = createContextClass();
 
 if (contextClass) {
@@ -26,39 +57,34 @@ if (contextClass) {
   // this needs implementation...
 
   // Web Audio API is not available. Ask the user to use a supported browser.
-
-  
 }
 
 
 console.log(context);
-
-
-// create new HTML5 audio element
+  // create new HTML5 audio element
 var audio = new Audio();
 
-// create source node containing the audio element
-var source = context.createMediaElementSource(audio);
+createContextNodes(audio, context);
 
-// create gain, filter and analyser nodes
-var gain = context.createGainNode();
-var filter = context.createBiquadFilter();
-var analyser = context.createAnalyser();
-
-
-// gain.gain.value = 0.5;
-// console.log(gain.gain.value);
+audio.src = 'https://s3-us-west-1.amazonaws.com/hr-mytunes/data/05+Hot+Like+Fire.mp3';
 
 
 
 
 
+// var frequencyData = new Uint8Array(totalBars);  
 
 
+window.addEventListener('load', onLoad, false);
+
+function onLoad() {
+
+  audio.play();
 
 
+}
 
-console.log('end app.js');
+
 
 
 
