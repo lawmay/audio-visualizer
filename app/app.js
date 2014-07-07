@@ -82,20 +82,20 @@ var audioSrc = [
 
 
 
-audio.src = audioSrc[2];
+audio.src = audioSrc[1];
 
 
 var totalBars = 70;
 var frequencyData = new Uint8Array(totalBars);
 
 var h = 400;
-var w = 1000;
+var w = 900;
 var myData = _.range(0, totalBars);
 
 
 var xScale = d3.scale.ordinal()
   .domain(myData)     // is the number of data elements
-  .rangeBands([0, w], 0.1, 0)    // 2nd parameter is padding between bars
+  .rangeBands([0, w], 0.2, 0)    // 2nd parameter is padding between bars
 ;
 
 
@@ -125,6 +125,7 @@ function onLoad() {
     .data(myData)
     .enter()
     .append("rect")
+    .attr("class", "rect")
   ;
 
  

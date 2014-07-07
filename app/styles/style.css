@@ -14,11 +14,17 @@ body {
 .svg-container {
 
   padding: 10px;
-  margin: 10px;
+  margin: 10px auto;
   border: 1px solid black;
 
   height: 400px;
-  width: 1000px;
+  width: 900px;
 
 
+}
+
+.rect {
+  fill: #ccc;
+  stroke-width: 1;
+  stroke: black;
 }
