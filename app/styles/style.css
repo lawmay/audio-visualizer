@@ -124,12 +124,12 @@ body {
 }
 
 #submit {
-  padding: 14px;
+  padding: 15px;
   border-radius: 20px;
   outline: 0;
   border: 0;
   transition: all 0.08s ease-in-out;
-  color: #333;
+  color: #555;
   cursor: pointer;
   font-size: 11px;
   line-height: 1.5em;
