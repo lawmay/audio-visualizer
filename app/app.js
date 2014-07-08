@@ -16,25 +16,19 @@ var analyser;
 
 var createContextNodes = function(audio, context) {
 
-  console.log(audio);
   // create source node containing the audio element
   var source = context.createMediaElementSource(audio);
-                       // createMediaElementSource
-  // create gain, filter and analyser nodes
+
+  // create gain and analyser nodes
   var gain = context.createGainNode();
-  // gain.gain.value = 0.01;
-  gain.gain.value = 0.5;
-  // console.log(gain);
+  gain.gain.value = 0.5;      // maybe make a fader/knob for this
 
   // CREATE FILTER???
   // var filter = context.createBiquadFilter();
   // filter.type = filter.LOWPASS;
   // filter.frequency.value = 10;
 
-  // var analyser = context.createAnalyser();
   analyser = context.createAnalyser();
-  // console.log('fftSize: ' + analyser.fftSize);
-  // analyser.fftSize = 256;
 
   source.connect(analyser);
   analyser.connect(gain);
@@ -57,10 +51,10 @@ if (contextClass) {
 }
 
 
-console.log(context);
-  // create new HTML5 audio element
+
+// create new HTML5 audio element
 var audio = new Audio();
-// var audio = document.getElementById('player');
+
 
 createContextNodes(audio, context);
 
@@ -81,12 +75,9 @@ audio.src = audioSrc[1];
 var totalBars = 70;
 var frequencyData = new Uint8Array(totalBars);
 
-var h = 600;
-// var w = 1300;
 var h = window.innerHeight;
 var w = window.innerWidth;
-console.log(w);
-var myData = _.range(0, totalBars);
+var myData = _.range(0, totalBars);   // create dummy data
 
 
 var xScale = d3.scale.ordinal()
@@ -106,7 +97,7 @@ var z = d3.scale.linear()
   .range([0, 320])
 ;
 
-// not really using this
+// not using this --- - - - -- -- --- - - 
 var yScaleInvert = d3
   .scale.linear()
   .domain([0, 255])   // domain is 0-255 according to the web audio api
@@ -116,13 +107,10 @@ var yScaleInvert = d3
 
 window.addEventListener('load', onLoad, false);
 
-// var currentColor = '#ffccaa';
 var currentColor = '#FBA710';
 
-
-
 function loadD3() {
-  // initialize d3 stuff when page loads
+  // initialize d3 stuff when page loads (with circles)
   svg = d3
     .select(".svg-container")
     .attr("class", "svg-container")
@@ -161,72 +149,71 @@ function onLoad() {
 
   var currentElement = loadD3();
 
-var clearShapes = function() {
-  d3.selectAll('rect').remove();
-  d3.selectAll('circle').remove();
-  d3.selectAll('polygon').remove();
+  var clearShapes = function() {
+    d3.selectAll('rect').remove();
+    d3.selectAll('circle').remove();
+    d3.selectAll('polygon').remove();
+  };
 
-};
+  var switchToCircs = function() {
+    clearShapes();
 
-var switchToCircs = function() {
-  clearShapes();
+    var circ = svg
+      .selectAll("circle")
+      .data(myData)
+      .enter()
+      .append("circle")
+      .attr("class", "circ")
+    ;
 
-  var circ = svg
-    .selectAll("circle")
-    .data(myData)
-    .enter()
-    .append("circle")
-    .attr("class", "circ")
-  ;
+    currentShape = 'circ';
+    currentElement = circ;
+  }
 
-  currentShape = 'circ';
-  currentElement = circ;
-}
+  var switchToRects = function() {
+    clearShapes();
 
-var switchToRects = function() {
-  clearShapes();
+    var rect = svg
+      .selectAll("rect")
+      .data(myData)
+      .enter()
+      .append("rect")
+      .attr("class", "rect")
+    ;
 
-  var rect = svg
-    .selectAll("rect")
-    .data(myData)
-    .enter()
-    .append("rect")
-    .attr("class", "rect")
-  ;
+    currentShape = 'rect';
+    currentElement = rect;
+  }
 
-  currentShape = 'rect';
-  currentElement = rect;
-}
+  var switchToCircs2 = function() {
+    clearShapes();
 
-var switchToCircs2 = function() {
-  clearShapes();
+    var circ = svg
+      .selectAll("circle")
+      .data(myData)
+      .enter()
+      .append("circle")
+      .attr("class", "circ")
+    ;
 
-  var circ = svg
-    .selectAll("circle")
-    .data(myData)
-    .enter()
-    .append("circle")
-    .attr("class", "circ")
-  ;
+    currentShape = 'circ2';
+    currentElement = circ;
+  }
 
-  currentShape = 'circ2';
-  currentElement = circ;
-}
+  var switchToPolys = function() {
+    clearShapes();
 
-var switchToPolys = function() {
-  clearShapes();
+    var poly = svg
+      .selectAll("polygon")
+      .data(myData)
+      .enter()
+      .append("polygon")
+      .attr("class", "poly")
+    ;
 
-  var poly = svg
-    .selectAll("polygon")
-    .data(myData)
-    .enter()
-    .append("polygon")
-    .attr("class", "poly")
-  ;
-
-  currentShape = 'poly';
-  currentElement = poly;
-}
+    currentShape = 'poly';
+    currentElement = poly;
+  }
 
 
   function renderFrame() {
@@ -283,8 +270,6 @@ var switchToPolys = function() {
 
 
 
-
-
   // var self = this;
   audio.play();
   setInterval(renderFrame, 20);
@@ -306,36 +291,34 @@ var polyButton = document.getElementById('polyButton');
 polyButton.addEventListener('click', switchToPolys, false);
 
 
-    window.addEventListener("keydown", keyControls, false);
+  window.addEventListener("keydown", keyControls, false);
 
-    function keyControls(e) {
+  function keyControls(e) {
 
-        switch(e.keyCode) {
-            case 32:
-            e.preventDefault();
-                if (audio.paused) {
-                    audio.play();
-                } else {
-                    audio.pause();
-                }
-                break;
-            case 37:
-                // console.log('left key');
-                switchToRects();
-                break;
-            case 39:
-                // console.log('right key');
-                switchToCircs();
-                break;
-        }   
-    }
-
-
+      switch(e.keyCode) {
+          case 32:
+          e.preventDefault();
+              if (audio.paused) {
+                  audio.play();
+              } else {
+                  audio.pause();
+              }
+              break;
+          case 37:
+              // console.log('left key');
+              switchToRects();
+              break;
+          case 39:
+              // console.log('right key');
+              switchToCircs();
+              break;
+      }   
+  }
 
 }
 
 
-
+// handle soundcloud loading
 function loadAndPlay(track_url) {
 
   var client_id = "2d6ee513d9de84d2aa73eb2e5eb454a9";
