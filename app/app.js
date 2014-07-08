@@ -1,13 +1,3 @@
-console.log('start app.js');
-
-// var configureNode = {
-
-//   'gain': function(node) {
-//     console.log('inside gain func');
-//   }
-
-
-// };
 
 
 // create new audio context
@@ -92,7 +82,10 @@ var totalBars = 70;
 var frequencyData = new Uint8Array(totalBars);
 
 var h = 600;
-var w = 1300;
+// var w = 1300;
+var h = window.innerHeight;
+var w = window.innerWidth;
+console.log(w);
 var myData = _.range(0, totalBars);
 
 
@@ -108,16 +101,12 @@ var yScale = d3
   .range([h, 0])      // 0 is second parameter to invert y-axis
 ;
 
-// var z = d3.scale.ordinal()
-//   .domain(totalBars)
-//   .range(colorbrewer.RdBu[9])
-// ;
-
 var z = d3.scale.linear()
   .domain([0, totalBars])
-  .range([0, 340])
+  .range([0, 320])
 ;
 
+// not really using this
 var yScaleInvert = d3
   .scale.linear()
   .domain([0, 255])   // domain is 0-255 according to the web audio api
@@ -192,9 +181,6 @@ var switchToCircs = function() {
 
   currentShape = 'circ';
   currentElement = circ;
-  // renderFrame();
-  // requestAnimationFrame(renderFrame);
-  // return circ;
 }
 
 var switchToRects = function() {
@@ -206,14 +192,10 @@ var switchToRects = function() {
     .enter()
     .append("rect")
     .attr("class", "rect")
-    // .transition()
   ;
 
   currentShape = 'rect';
   currentElement = rect;
-  // requestAnimationFrame(renderFrame);
-  // renderFrame();
-  // return rect;
 }
 
 var switchToCircs2 = function() {
@@ -254,23 +236,16 @@ var switchToPolys = function() {
    if (currentShape === 'rect') {
       currentElement
         .data(frequencyData)
-        // .transition()
-        // .duration(1)
         .attr('x',function(d, i) { return xScale(i); } )
         .attr('y',function(d, i) { return yScale(d); } )
         .attr('width', function(d, i) { return xScale.rangeBand(); } )
         .attr('height', function(d) { return h - yScale(d); } )
-        // .style('fill', function(d, i) { return z(i); } )
-        // .style('fill', function(d, i) { return currentColor; } )
-        // .style('fill', function(d, i) { return d3.hsl((i = (i + 1) % 360), 1, .5); } )
         .style('fill', function(d, i) { return d3.hsl(z(i), 1, .5); } )
       ;    
    } else if (currentShape === 'circ') {
       currentElement
         .data(frequencyData)
-        // .transition()
-        // .duration(40)
-        .attr('cx',function(d, i) { var tempXScale = xScale(i); return tempXScale; } )
+        .attr('cx',function(d, i) { return xScale(i); } )
         .attr('cy',function(d, i) { return yScale(i * (w / (totalBars*5))); } )
         .attr('r',function(d, i) { return d / 1.8; } )
         .style('fill', function(d, i) { return d3.hsl((i = (i + 1) % 360), 1, .5); } )
@@ -278,32 +253,27 @@ var switchToPolys = function() {
    } else if (currentShape === 'circ2') {
       currentElement
         .data(frequencyData)
-        .attr('cx',function(d, i) { var tempXScale = xScale(i); return tempXScale; } )
-        // .attr('cy',function(d, i) { return yScale(i * (w / (totalBars*5))); } )
+        .attr('cx',function(d, i) { return xScale(i); } )
         .attr('cy',function(d, i) { return h / 2; } )
         .attr('r',function(d, i) { return d; } )
         .style('fill', function(d, i) { return 'none'; } )
         .style('stroke-width', function(d, i) { return '2px'; } )
         .style('stroke', function(d, i) { return d3.hsl((i = (i + 90) % 360), 10, .4); } )
-        // .style('stroke', function(d, i) { return '#000'; } )
       ;        
    } else if (currentShape === 'poly') {
       currentElement
         .data(frequencyData)
         .transition()
-        .duration(90)
-      // <polygon points="50,0 100,100 0,100"
+        .duration(100)
         .attr('points',function(d, i) {
           var xValue = xScale(i);
-          var yValue = yScale(d) / 1.5;
-          // var yValue = yScale(i * (h * (totalBars/5)));
+          var yValue = yScale(d);
           var topPoints = (xValue + 50) + ',' + yValue;
           var rightPoints = (xValue + 100) + ',' + (yValue + 100);
           var leftPoints = xValue + ',' + (yValue + 100);
           return topPoints + ' ' + rightPoints + ' ' + leftPoints;
         } )
         .style('fill', function(d, i) { return d3.hsl((i = (i + 270) % 360), 10, .4); } )
-        // .style('fill', 'none' )
         .style('stroke-width', function(d, i) { return '1px'; } )
         .style('stroke', function(d, i) { return d3.hsl((i = (i + 225) % 360), 10, .4); } )
         .style('transform', function(d, i) { return 'scale(2,2)'; } )
@@ -343,8 +313,6 @@ polyButton.addEventListener('click', switchToPolys, false);
         switch(e.keyCode) {
             case 32:
             e.preventDefault();
-                // spacebar pressed
-                // loader.directStream('toggle');
                 if (audio.paused) {
                     audio.play();
                 } else {
@@ -352,14 +320,11 @@ polyButton.addEventListener('click', switchToPolys, false);
                 }
                 break;
             case 37:
-                // left key pressed
-                console.log('left key');
+                // console.log('left key');
                 switchToRects();
                 break;
             case 39:
-                // right key pressed
-                // loader.directStream('forward');
-                console.log('right key');
+                // console.log('right key');
                 switchToCircs();
                 break;
         }   
@@ -395,7 +360,6 @@ function loadAndPlay(track_url) {
           }
   });
 
-    // console.log('im here---');
 };
 
 

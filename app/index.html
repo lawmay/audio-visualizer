@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>audio hackalackin</title>
+  <title>Audio Visualizer</title>
 
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <script src="https://connect.soundcloud.com/sdk-2.0.0.js"></script>
@@ -19,20 +19,20 @@
 
     <div class="header-container">
       <div class="title-container">
-        Visualizer
+        <div id="audio-title">AUDIO</div>
+        <div id="visualizer-title">Visualizer</div>
       </div>
 
       <div class="input-container">
-        <!-- Paste Soundcloud URL here (https://soundcloud.com/artist/track) -->
-        <input id="input" placeholder="soundcloud url here (https://soundcloud.com/artist/track) ... ">
+        <input id="input" placeholder="soundcloud url here">
         <button id="submit">Play Track</button>
       </div>
 
     <div class="controls-container">
-      <div id="rectButton"></div>
-      <div id="circleButton2"></div>
-      <div id="polyButton"></div>
       <div id="circleButton"></div>
+      <div id="rectButton"></div>
+      <div id="polyButton"></div>
+      <div id="circleButton2"></div>
     </div>
 
       <div id="song-title-container">
