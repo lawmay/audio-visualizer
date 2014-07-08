@@ -4,6 +4,7 @@ body {
   font-family: 'Roboto', sans-serif;
   /*background: #414040;*/
   background-color: #303030;
+  background-color: white;
   color: #E1DEE2;
 }
 
@@ -76,7 +77,8 @@ body {
   padding: 14px 10px 20px 10px;
   margin: 10px auto;
   font-size: 24px;
-  background-color: #303030;
+  /*background-color: #303030;*/
+  background-color: white;
   border-bottom: 1px solid #666;
   /*float: left;*/
   width: 1300px;
@@ -90,7 +92,7 @@ body {
   padding: 14px;
   width: 300px;
   border-radius: 21px;
-  border: 0;
+  border: 1px solid #ccc;
   outline: 0;
   font-size: 12px;
   /*font-weight: 100;*/
@@ -114,6 +116,7 @@ body {
   cursor: pointer;
   font-size: 11px;
   line-height: 1.5em;
+  background-color: #aaa;
 }
 
 #submit:hover {
@@ -151,8 +154,22 @@ body {
   border-radius: 50%;
   width: 50px;
   height: 50px; 
-  border: 1px solid #aaa;
-  background: #444;
+  /*border: 1px solid #aaa;*/
+  background: #ccc;
+  /*margin: 10px auto;*/
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  /*margin-bottom: 16px;*/
+  /*margin-top: 10px;*/
+}
+
+#circleButton2 {
+  display: inline-block;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px; 
+  /*border: 1px solid #aaa;*/
+  background: #ccc;
   /*margin: 10px auto;*/
   transition: all 0.2s ease-in-out;
   cursor: pointer;
@@ -165,16 +182,42 @@ body {
   /*margin: 10px auto;*/
   width: 50px;
   height: 50px;
-  border: 1px solid #aaa;
-  background: #444;
+  /*border: 1px solid #aaa;*/
+  background: #ccc;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   /*margin-bottom: 16px;*/
 }
-#rectButton:hover, #circleButton:hover {
+
+#polyButton {
+  display: inline-block;
+/*  width: 50px;
+  height: 50px;
+  border: 1px solid #aaa;
+*/  
+  /*background: black;*/
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  width: 0; 
+  height: 0; 
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 50px solid #ccc;
+  /*border: 1px solid black;*/
+}
+
+#polyButton:hover {
+ border-bottom: 50px solid #333; 
+}
+
+#polyButton:active {
+ border-bottom: 50px solid #ccc;
+}
+
+#rectButton:hover, #circleButton:hover, #circleButton2:hover {
   background: #333;
 }
-#rectButton:active, #circleButton:active {
+#rectButton:active, #circleButton:active, #circleButton2:active {
   background: #ccc;
 }
 *:focus {

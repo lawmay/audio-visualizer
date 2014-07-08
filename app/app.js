@@ -113,7 +113,16 @@ var yScale = d3
 //   .range(colorbrewer.RdBu[9])
 // ;
 
+var z = d3.scale.linear()
+  .domain([0, totalBars])
+  .range([0, 340])
+;
 
+var yScaleInvert = d3
+  .scale.linear()
+  .domain([0, 255])   // domain is 0-255 according to the web audio api
+  .range([0, h])      // 0 is second parameter to invert y-axis
+;
 
 
 window.addEventListener('load', onLoad, false);
@@ -133,14 +142,6 @@ function loadD3() {
     .attr("height", h)
   ;
 
-  // var rect = svg
-  //   .selectAll("rect")
-  //   .data(myData)
-  //   .enter()
-  //   .append("rect")
-  //   .attr("class", "rect")
-  // ;
-
   var circ = svg
     .selectAll("circle")
     .data(myData)
@@ -149,15 +150,11 @@ function loadD3() {
     .attr("class", "circ")
   ;
 
-  // return rect;
   return circ;
 }
 
 var svg;
 var currentShape = 'circ';
-// var rect;
-// var circ;
-
 
 
 function onLoad() {
@@ -174,9 +171,16 @@ function onLoad() {
   
 
   var currentElement = loadD3();
-var switchToCircs = function() {
+
+var clearShapes = function() {
   d3.selectAll('rect').remove();
   d3.selectAll('circle').remove();
+  d3.selectAll('polygon').remove();
+
+};
+
+var switchToCircs = function() {
+  clearShapes();
 
   var circ = svg
     .selectAll("circle")
@@ -194,8 +198,7 @@ var switchToCircs = function() {
 }
 
 var switchToRects = function() {
-  d3.selectAll('circle').remove();
-  d3.selectAll('rect').remove();
+  clearShapes();
 
   var rect = svg
     .selectAll("rect")
@@ -213,6 +216,37 @@ var switchToRects = function() {
   // return rect;
 }
 
+var switchToCircs2 = function() {
+  clearShapes();
+
+  var circ = svg
+    .selectAll("circle")
+    .data(myData)
+    .enter()
+    .append("circle")
+    .attr("class", "circ")
+  ;
+
+  currentShape = 'circ2';
+  currentElement = circ;
+}
+
+var switchToPolys = function() {
+  clearShapes();
+
+  var poly = svg
+    .selectAll("polygon")
+    .data(myData)
+    .enter()
+    .append("polygon")
+    .attr("class", "poly")
+  ;
+
+  currentShape = 'poly';
+  currentElement = poly;
+}
+
+
   function renderFrame() {
    // requestAnimationFrame(renderFrame);
    analyser.getByteFrequencyData(frequencyData);
@@ -227,7 +261,9 @@ var switchToRects = function() {
         .attr('width', function(d, i) { return xScale.rangeBand(); } )
         .attr('height', function(d) { return h - yScale(d); } )
         // .style('fill', function(d, i) { return z(i); } )
-        .style('fill', function(d, i) { return currentColor; } )
+        // .style('fill', function(d, i) { return currentColor; } )
+        // .style('fill', function(d, i) { return d3.hsl((i = (i + 1) % 360), 1, .5); } )
+        .style('fill', function(d, i) { return d3.hsl(z(i), 1, .5); } )
       ;    
    } else if (currentShape === 'circ') {
       currentElement
@@ -237,7 +273,40 @@ var switchToRects = function() {
         .attr('cx',function(d, i) { var tempXScale = xScale(i); return tempXScale; } )
         .attr('cy',function(d, i) { return yScale(i * (w / (totalBars*5))); } )
         .attr('r',function(d, i) { return d / 1.8; } )
-        .style('fill', function(d, i) { return currentColor; } )
+        .style('fill', function(d, i) { return d3.hsl((i = (i + 1) % 360), 1, .5); } )
+      ;        
+   } else if (currentShape === 'circ2') {
+      currentElement
+        .data(frequencyData)
+        .attr('cx',function(d, i) { var tempXScale = xScale(i); return tempXScale; } )
+        // .attr('cy',function(d, i) { return yScale(i * (w / (totalBars*5))); } )
+        .attr('cy',function(d, i) { return h / 2; } )
+        .attr('r',function(d, i) { return d; } )
+        .style('fill', function(d, i) { return 'none'; } )
+        .style('stroke-width', function(d, i) { return '2px'; } )
+        .style('stroke', function(d, i) { return d3.hsl((i = (i + 90) % 360), 10, .4); } )
+        // .style('stroke', function(d, i) { return '#000'; } )
+      ;        
+   } else if (currentShape === 'poly') {
+      currentElement
+        .data(frequencyData)
+        .transition()
+        .duration(90)
+      // <polygon points="50,0 100,100 0,100"
+        .attr('points',function(d, i) {
+          var xValue = xScale(i);
+          var yValue = yScale(d) / 1.5;
+          // var yValue = yScale(i * (h * (totalBars/5)));
+          var topPoints = (xValue + 50) + ',' + yValue;
+          var rightPoints = (xValue + 100) + ',' + (yValue + 100);
+          var leftPoints = xValue + ',' + (yValue + 100);
+          return topPoints + ' ' + rightPoints + ' ' + leftPoints;
+        } )
+        .style('fill', function(d, i) { return d3.hsl((i = (i + 270) % 360), 10, .4); } )
+        // .style('fill', 'none' )
+        .style('stroke-width', function(d, i) { return '1px'; } )
+        .style('stroke', function(d, i) { return d3.hsl((i = (i + 225) % 360), 10, .4); } )
+        .style('transform', function(d, i) { return 'scale(2,2)'; } )
       ;        
    }
   }
@@ -256,15 +325,16 @@ var switchToRects = function() {
 
 var circleButton = document.getElementById('circleButton');
 circleButton.addEventListener('click', switchToCircs, false);
-// function switchCircs(e) {
-//   switchToCircs();
-// };
+
+var circleButton2 = document.getElementById('circleButton2');
+circleButton2.addEventListener('click', switchToCircs2, false);
 
 var rectButton = document.getElementById('rectButton');
 rectButton.addEventListener('click', switchToRects, false);
-// function switchCircs(e) {
-//   switchToRects();
-// };
+
+var polyButton = document.getElementById('polyButton');
+polyButton.addEventListener('click', switchToPolys, false);
+
 
     window.addEventListener("keydown", keyControls, false);
 
@@ -305,8 +375,6 @@ function loadAndPlay(track_url) {
 
   var client_id = "2d6ee513d9de84d2aa73eb2e5eb454a9";
   
-  // permalink to a track
-  // var track_url = 'https://soundcloud.com/cocolo-studio/dj-funakoshi-q-ichirow';
 
   SC.initialize({
       client_id: client_id
@@ -317,25 +385,14 @@ function loadAndPlay(track_url) {
     console.log('inside resolve get');
     console.log(track);
 
-      // SC.get('/tracks/' + track.id, {}, function(sound, error) {
           console.log('inside tracks get');
-          // var soundCloudSrc = sound.stream_url + '?client_id=' + client_id;
           var soundCloudSrc = track.stream_url + '?client_id=' + client_id;
-          // console.log(soundCloudSrc);
-          // audio.src = soundCloudSrc;
-          // console.log(audio);
+
           if (track.title != undefined) {
             audio.setAttribute('src', soundCloudSrc);
             document.getElementById('song-title').innerHTML = track.title;
             audio.play();
           }
-          // console.log();
-          // document.getElementById('song-title').value = 'bblas';
-          // renderFrame();
-          // source.mediaElement.play();
-          // player.setAttribute('src', sound.stream_url + '?client_id=' + client_id);
-          // player.play();
-      // });
   });
 
     // console.log('im here---');
