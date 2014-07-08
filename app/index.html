@@ -4,6 +4,7 @@
 <head>
   <title>audio hackalackin</title>
 
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <script src="http://connect.soundcloud.com/sdk-2.0.0.js"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="http://d3js.org/colorbrewer.v1.min.js"></script>
@@ -16,29 +17,30 @@
 <body>
   <script src="app.js"></script>
 
-
-  <div class="container">
-
     <div class="header-container">
       <div class="title-container">
-        Audio Visualizer
+        Visualizer
       </div>
 
       <div class="input-container">
-        <input id="input" placeholder="Paste Soundcloud URL here (https://soundcloud.com/artist/track)">
+        <!-- Paste Soundcloud URL here (https://soundcloud.com/artist/track) -->
+        <input id="input" placeholder="soundcloud url here (https://soundcloud.com/artist/track) ... ">
         <button id="submit">Load & Play</button>
       </div>
 
-      <div id="song-title">Aaliyah - One In A Million</div>
+      <div id="song-title-container">
+        <div id="now-playing">Now Playing</div>
+        <div id="song-title">Aaliyah - One In A Million</div>
+      </div>
     </div>
 
+  <div class="container">
     <div class="controls-container">
       <div id="circleButton"></div>
       <div id="rectButton"></div>
     </div>
 
     <div class="svg-container"></div>
-
   </div>
 
   <audio id="player" hidden controls="" autoplay="" preload="" autobuffer=""></audio>

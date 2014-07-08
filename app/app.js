@@ -119,7 +119,7 @@ var yScale = d3
 window.addEventListener('load', onLoad, false);
 
 // var currentColor = '#ffccaa';
-var currentColor = '#eee';
+var currentColor = '#FBA710';
 
 
 

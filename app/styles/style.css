@@ -1,65 +1,81 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: sans-serif;
-  background: #555;
-  color: #eee;
+  font-family: 'Roboto', sans-serif;
+  /*background: #414040;*/
+  background-color: #303030;
+  color: #E1DEE2;
 }
 
 .container {
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid white;
+  padding: 0px 20px;
+  margin: 0px auto;
+  /*border: 1px solid white;*/
 }
-
 
 .svg-container {
   padding: 10px;
   margin: 20px auto;
-  border: 1px solid white;
   height: 400px;
   width: 1000px;
   float: right;
+  border: 1px solid #5A5959;
+  border-radius: 4px;
 }
 
 .controls-container {
   padding: 10px;
   margin: 20px auto;
-  border: 1px solid white;
+  /*border: 1px solid white;*/
   height: 400px;
   width: 250px;
-  float: left;
+  /*float: left;*/
+  border: 1px solid #5A5959;
+  border-radius: 4px;
+  display: inline-block;
 }
 
 .rect {
   fill: #ccc;
   stroke-width: 1px;
-  stroke: gray;
+  stroke: #222;
+  /*display: inline-block;*/
 }
 
 .circ {
   fill: #ccc;
   stroke-width: 1px;
-  stroke: black;
+  stroke: #222;
+  /*display: inline-block;*/
 }
 
 .input-container {
   display: inline-block;
   /*padding: 4px; */
-  /*margin: 10px; */
+  margin-top: -10px;
+  /*float: left;*/
 
 }
 .title-container {
   display: inline-block;
   /*padding: 4px; */
   /*margin: 10px; */
+  font-family: sans-serif;
+  color: #FBA710;
+  font-size: 50px;
+  font-weight: 400;
+  margin-top: 6px;
+  letter-spacing: -3px;
 }
 
 .header-container {
-  border: 1px solid white;
-  padding: 10px 0px;
+  /*border: 1px solid white;*/
+  padding: 14px 10px 20px 10px;
   /*margin: 10px auto;*/
-  font-size: 20px;
+  font-size: 24px;
+  background-color: #303030;
+  border-bottom: 1px solid #666;
+  /*float: left;*/
 }
 
 .header-container div {
@@ -67,43 +83,95 @@ body {
 }
 
 #input {
-  padding: 10px;
-  width: 500px;
-  border-radius: 20px;;
+  padding: 14px;
+  width: 400px;
+  border-radius: 21px;
+  border: 0;
   outline: 0;
   font-size: 12px;
   /*font-weight: 100;*/
+  opacity: 0.7;
+  transition: all 0.1s ease-in-out;
+  color: #666;
+}
+
+#input:focus {
+  opacity: 1;
+  background-color: #eee;
 }
 
 #submit {
-  padding: 10px;
+  padding: 14px;
   border-radius: 20px;
   outline: 0;
+  border: 0;
+  transition: all 0.08s ease-in-out;
+  color: #333;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1.5em;
 }
 
+#submit:hover {
+  background-color: #ddd;
+}
+
+#submit:active {
+  background-color: #efefef;
+}
+
+#song-title-container {
+  /*float: right;*/
+  /*padding: 6px;*/
+  margin-top: 6px;
+  margin-right: 30px;
+  display: inline-block;
+  color: white;
+  float: right;
+}
 
 #song-title {
   font-size: 24px;
-  float: right;
-  padding: 10px;
-  margin-right: 60px;
-  color: white;
+  color: #FBA710;
+}
+
+#now-playing {
+  /*margin-top: 20px;*/
+  font-size: 10px;
+  margin-bottom: 6px;
+  color: #aaa;
 }
 
 #circleButton {
-  display: inline-block;
+  /*display: inline-block;*/
   border-radius: 50%;
-  width: 100px;
-  height: 100px; 
-  border: 1px solid white;
+  width: 80px;
+  height: 80px; 
+  border: 1px solid #aaa;
   background: #444;
   margin: 10px auto;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  margin-bottom: 16px;
 }
+
 #rectButton {
-  display: inline-block;
+  /*display: inline-block;*/
   margin: 10px auto;
-  width: 100px;
-  height: 100px;
-  border: 1px solid white;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #aaa;
   background: #444;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+#rectButton:hover, #circleButton:hover {
+  background: #333;
+}
+#rectButton:active, #circleButton:active {
+  background: #ccc;
+}
+*:focus {
+    outline: 0;
 }
