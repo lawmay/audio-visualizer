@@ -4,7 +4,9 @@
 <head>
   <title>audio hackalackin</title>
 
+  <script src="http://connect.soundcloud.com/sdk-2.0.0.js"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="http://d3js.org/colorbrewer.v1.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
   <script src="bower_components/underscore/underscore.js" charset="utf-8"></script>
 
@@ -17,15 +19,27 @@
 
   <div class="container">
 
-    <p>hey bb, ily bae</p>
+    <div class="header-container">
+      <div class="title-container">
+        Audio Visualizer
+      </div>
 
-    <div class="svg-container">
+      <div class="input-container">
+        <input id="input" placeholder="Paste Soundcloud URL here (https://soundcloud.com/artist/track)">
+        <button id="submit">Load & Play</button>
+      </div>
 
+      <div id="song-title">Aaliyah - Millon</div>
     </div>
 
+    <div class="controls-container">
+    </div>
 
+    <div class="svg-container"></div>
 
   </div>
+
+  <audio id="player" hidden controls="" autoplay="" preload="" autobuffer=""></audio>
 
 </body>
 </html>

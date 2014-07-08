@@ -12,19 +12,65 @@ body {
 
 
 .svg-container {
-
   padding: 10px;
-  margin: 10px auto;
+  margin: 20px auto;
   border: 1px solid black;
-
   height: 400px;
   width: 900px;
+  float: right;
+}
 
-
+.controls-container {
+  padding: 10px;
+  margin: 20px auto;
+  border: 1px solid black;
+  height: 400px;
+  width: 350px;
+  float: left;
 }
 
 .rect {
   fill: #ccc;
-  stroke-width: 1;
+  stroke-width: 1px;
   stroke: black;
 }
+
+.input-container {
+  display: inline-block;
+  /*padding: 4px; */
+  /*margin: 10px; */
+
+}
+.title-container {
+  display: inline-block;
+  /*padding: 4px; */
+  /*margin: 10px; */
+}
+
+.header-container {
+  border: 1px solid black;
+  padding: 10px 0px;
+  /*margin: 10px auto;*/
+  font-size: 20px;
+}
+
+.header-container div {
+  margin-left: 30px;
+}
+
+#input {
+  padding: 10px;
+  width: 500px;
+}
+
+#submit {
+  padding: 10px;
+}
+
+
+#song-title {
+  float: right;
+  padding: 10px;
+  margin-right: 60px;
+}
+
