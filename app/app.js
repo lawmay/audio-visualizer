@@ -91,8 +91,8 @@ audio.src = audioSrc[1];
 var totalBars = 70;
 var frequencyData = new Uint8Array(totalBars);
 
-var h = 400;
-var w = 1000;
+var h = 600;
+var w = 1300;
 var myData = _.range(0, totalBars);
 
 
@@ -166,7 +166,9 @@ function onLoad() {
   var submitButton = document.getElementById('submit');
   submitButton.onclick = function() {
       var track_url = document.getElementById('input').value;
-      loadAndPlay(track_url);
+      if (track_url != '') {
+        loadAndPlay(_.escape(track_url));
+      }
   };
 
   
@@ -233,7 +235,7 @@ var switchToRects = function() {
         // .transition()
         // .duration(40)
         .attr('cx',function(d, i) { var tempXScale = xScale(i); return tempXScale; } )
-        .attr('cy',function(d, i) { return yScale(i * (w / (totalBars*4))); } )
+        .attr('cy',function(d, i) { return yScale(i * (w / (totalBars*5))); } )
         .attr('r',function(d, i) { return d / 1.8; } )
         .style('fill', function(d, i) { return currentColor; } )
       ;        
@@ -320,13 +322,15 @@ function loadAndPlay(track_url) {
           // var soundCloudSrc = sound.stream_url + '?client_id=' + client_id;
           var soundCloudSrc = track.stream_url + '?client_id=' + client_id;
           // console.log(soundCloudSrc);
-          audio.setAttribute('src', soundCloudSrc);
           // audio.src = soundCloudSrc;
           // console.log(audio);
-          document.getElementById('song-title').innerHTML = track.title;
+          if (track.title != undefined) {
+            audio.setAttribute('src', soundCloudSrc);
+            document.getElementById('song-title').innerHTML = track.title;
+            audio.play();
+          }
           // console.log();
           // document.getElementById('song-title').value = 'bblas';
-          audio.play();
           // renderFrame();
           // source.mediaElement.play();
           // player.setAttribute('src', sound.stream_url + '?client_id=' + client_id);

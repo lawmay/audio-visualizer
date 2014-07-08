@@ -15,22 +15,25 @@ body {
 
 .svg-container {
   padding: 10px;
-  margin: 20px auto;
-  height: 400px;
-  width: 1000px;
+  margin: 10px auto 20px auto;
+  height: 600px;
+  /*width: 1500px;*/
+  width: 1300;
   float: right;
   border: 1px solid #5A5959;
   border-radius: 4px;
 }
 
 .controls-container {
-  padding: 10px;
-  margin: 20px auto;
+  /*padding: 10px;*/
+  /*margin: 20px auto;*/
+  padding: 0px 0px 0px 20px;
+  margin: 10px 0px 0px 0px;
   /*border: 1px solid white;*/
-  height: 400px;
-  width: 250px;
+  /*height: 400px;*/
+  /*width: 250px;*/
   /*float: left;*/
-  border: 1px solid #5A5959;
+  /*border: 1px solid #5A5959;*/
   border-radius: 4px;
   display: inline-block;
 }
@@ -52,7 +55,7 @@ body {
 .input-container {
   display: inline-block;
   /*padding: 4px; */
-  margin-top: -10px;
+  /*margin-top: -10px;*/
   /*float: left;*/
 
 }
@@ -64,27 +67,28 @@ body {
   color: #FBA710;
   font-size: 50px;
   font-weight: 400;
-  margin-top: 6px;
+  /*margin-top: 6px;*/
   letter-spacing: -3px;
 }
 
 .header-container {
   /*border: 1px solid white;*/
   padding: 14px 10px 20px 10px;
-  /*margin: 10px auto;*/
+  margin: 10px auto;
   font-size: 24px;
   background-color: #303030;
   border-bottom: 1px solid #666;
   /*float: left;*/
+  width: 1300px;
 }
 
 .header-container div {
-  margin-left: 30px;
+  margin-left: 10px;
 }
 
 #input {
   padding: 14px;
-  width: 400px;
+  width: 300px;
   border-radius: 21px;
   border: 0;
   outline: 0;
@@ -123,7 +127,7 @@ body {
 #song-title-container {
   /*float: right;*/
   /*padding: 6px;*/
-  margin-top: 6px;
+  margin-top: 12px;
   margin-right: 30px;
   display: inline-block;
   color: white;
@@ -143,28 +147,29 @@ body {
 }
 
 #circleButton {
-  /*display: inline-block;*/
+  display: inline-block;
   border-radius: 50%;
-  width: 80px;
-  height: 80px; 
+  width: 50px;
+  height: 50px; 
   border: 1px solid #aaa;
   background: #444;
-  margin: 10px auto;
+  /*margin: 10px auto;*/
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  margin-bottom: 16px;
+  /*margin-bottom: 16px;*/
+  /*margin-top: 10px;*/
 }
 
 #rectButton {
-  /*display: inline-block;*/
-  margin: 10px auto;
-  width: 80px;
-  height: 80px;
+  display: inline-block;
+  /*margin: 10px auto;*/
+  width: 50px;
+  height: 50px;
   border: 1px solid #aaa;
   background: #444;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  margin-bottom: 16px;
+  /*margin-bottom: 16px;*/
 }
 #rectButton:hover, #circleButton:hover {
   background: #333;
