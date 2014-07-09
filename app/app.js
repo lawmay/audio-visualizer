@@ -244,7 +244,7 @@ function onLoad() {
         .attr('cy',function(d, i) { return h / 2; } )
         .attr('r',function(d, i) { return d; } )
         .style('fill', function(d, i) { return 'none'; } )
-        .style('stroke-width', function(d, i) { return '2px'; } )
+        .style('stroke-width', function(d, i) { return '1px'; } )
         .style('stroke', function(d, i) { return d3.hsl((i = (i + 90) % 360), 10, .4); } )
       ;        
    } else if (currentShape === 'poly') {
@@ -255,12 +255,12 @@ function onLoad() {
         .attr('points',function(d, i) {
           var xValue = xScale(i);
           var yValue = yScale(d);
-          var topPoints = (xValue + 50) + ',' + yValue;
+          var topPoints = (xValue + 40) + ',' + yValue;
           var rightPoints = (xValue + 100) + ',' + (yValue + 100);
           var leftPoints = xValue + ',' + (yValue + 100);
           return topPoints + ' ' + rightPoints + ' ' + leftPoints;
         } )
-        .style('fill', function(d, i) { return d3.hsl((i = (i + 270) % 360), 10, .4); } )
+        .style('fill', function(d, i) { return d3.hsl((i = (i + 255) % 360), 10, .4); } )
         .style('stroke-width', function(d, i) { return '1px'; } )
         .style('stroke', function(d, i) { return d3.hsl((i = (i + 225) % 360), 10, .4); } )
         .style('transform', function(d, i) { return 'scale(2,2)'; } )
