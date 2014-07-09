@@ -67,7 +67,7 @@ body {
 }
 
 #visualizer-title {
-  font-size: 40px;
+  font-size: 38px;
 }
 
 .header-container {
@@ -123,7 +123,7 @@ body {
 }
 
 #song-title-container {
-  margin-top: 10px;
+  margin-top: 4px;
   margin-right: 12px;
   display: inline-block;
   color: white;
@@ -131,12 +131,13 @@ body {
 }
 
 #song-title {
-  font-size: 26px;
+  font-size: 32px;
   color: #FBA710;
+  letter-spacing: -1px;
 }
 
 #now-playing {
-  font-size: 12px;
+  font-size: 16px;
   margin-bottom: 6px;
   color: #aaa;
 }
