@@ -56,7 +56,7 @@ body {
   color: #FBA710;
   font-size: 30px;
   font-weight: 400;
-  margin-top: 2px;
+  margin-top: 4px;
   letter-spacing: -3px;
   float: left;
 }
@@ -93,12 +93,12 @@ body {
   font-size: 12px;
   opacity: 0.7;
   transition: all 0.1s ease-in-out;
-  color: #666;
+  color: #000;
 }
 
 #input:focus {
   opacity: 0.9;
-  background-color: #eee;
+  background-color: #efefef;
 }
 
 #submit {
@@ -111,11 +111,12 @@ body {
   cursor: pointer;
   font-size: 11px;
   line-height: 1.5em;
-  background-color: #ccc;
+  background-color: #d0d0d0;
+  /*background-color: rgba(16,218,251,0.3);*/
 }
 
 #submit:hover {
-  background-color: #ddd;
+  background-color: #dfdfdf;
 }
 
 #submit:active {
@@ -147,7 +148,7 @@ body {
   border-radius: 50%;
   width: 50px;
   height: 50px; 
-  background: #ddd;
+  background: rgba(251,167,16,0.6);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -158,7 +159,8 @@ body {
   width: 50px;
   height: 50px; 
   border: 1px solid #ddd;
-  background: white;
+  /*background: white;*/
+  background: rgba(251,167,16,0.6);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -167,7 +169,7 @@ body {
   display: inline-block;
   width: 50px;
   height: 50px;
-  background: #ddd;
+  background: rgba(251,167,16,0.6);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -180,22 +182,24 @@ body {
   height: 0; 
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
-  border-bottom: 50px solid #ddd;
+  border-bottom: 50px solid rgba(251,167,16,0.6);
 }
 
 #polyButton:hover {
- border-bottom: 50px solid #333; 
+ /*border-bottom: 50px solid rgba(16,218,251,0.8);*/
+ border-bottom: 50px solid #aaa;
 }
 
 #polyButton:active {
- border-bottom: 50px solid #ccc;
+ border-bottom: 50px solid #ddd;
 }
 
 #rectButton:hover, #circleButton:hover, #circleButton2:hover {
-  background: #333;
+  background: #aaa;
+  /*background: rgba(16,218,251,0.8);*/
 }
 #rectButton:active, #circleButton:active, #circleButton2:active {
-  background: #ccc;
+  background: #ddd;
 }
 *:focus {
     outline: 0;
