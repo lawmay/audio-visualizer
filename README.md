@@ -1,4 +1,7 @@
-audio-hackalackin
+audio-visualizer
 =================
+http://audiovisualizer.firebaseapp.com
 
-2-day hackathon using audio stuff and stuff
+
+TODO:
+- Reimplement using React.
