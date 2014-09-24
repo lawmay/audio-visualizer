@@ -1,9 +1,12 @@
 audio-visualizer
 =================
+
+![Alt text](img/ss1.png "noughts and crosses")
+
+
 http://audiovisualizer.firebaseapp.com
 
-
-TODO:
+###TODO
 - Implement a scrubbable progress bar
 - Refactor app code
 - Reimplement using Backbone or React
@@ -12,5 +15,9 @@ TODO:
 - Ability to handle playlist urls
 - Forward and back funtionality for a playlist
 
-Icebox:
+###Icebox
 - Tests
+
+disclaimer
+=================
+This was written in a couple of days.
