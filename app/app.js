@@ -3,10 +3,10 @@
 // create new audio context
 var createContextClass = function() {
   return (
-    window.AudioContext || 
-    window.webkitAudioContext || 
-    window.mozAudioContext || 
-    window.oAudioContext || 
+    window.AudioContext ||
+    window.webkitAudioContext ||
+    window.mozAudioContext ||
+    window.oAudioContext ||
     window.msAudioContext
     )
   ;
@@ -20,7 +20,7 @@ var createContextNodes = function(audio, context) {
   var source = context.createMediaElementSource(audio);
 
   // create gain and analyser nodes
-  var gain = context.createGainNode();
+  var gain = context.createGain();
   gain.gain.value = 0.5;      // maybe make a fader/knob for this
 
   // CREATE FILTER???
@@ -97,7 +97,7 @@ var z = d3.scale.linear()
   .range([0, 320])
 ;
 
-// not using this --- - - - -- -- --- - - 
+// not using this --- - - - -- -- --- - -
 var yScaleInvert = d3
   .scale.linear()
   .domain([0, 255])   // domain is 0-255 according to the web audio api
@@ -145,7 +145,7 @@ function onLoad() {
       }
   };
 
-  
+
 
   var currentElement = loadD3();
 
@@ -228,7 +228,7 @@ function onLoad() {
         .attr('width', function(d, i) { return xScale.rangeBand(); } )
         .attr('height', function(d) { return h - yScale(d); } )
         .style('fill', function(d, i) { return d3.hsl(z(i), 1, .5); } )
-      ;    
+      ;
    } else if (currentShape === 'circ') {
       currentElement
         .data(frequencyData)
@@ -236,7 +236,7 @@ function onLoad() {
         .attr('cy',function(d, i) { return yScale(i * (w / (totalBars*5))); } )
         .attr('r',function(d, i) { return d / 1.8; } )
         .style('fill', function(d, i) { return d3.hsl((i = (i + 1) % 360), 1, .5); } )
-      ;        
+      ;
    } else if (currentShape === 'circ2') {
       currentElement
         .data(frequencyData)
@@ -246,7 +246,7 @@ function onLoad() {
         .style('fill', function(d, i) { return 'none'; } )
         .style('stroke-width', function(d, i) { return '1px'; } )
         .style('stroke', function(d, i) { return d3.hsl((i = (i + 90) % 360), 10, .4); } )
-      ;        
+      ;
    } else if (currentShape === 'poly') {
       currentElement
         .data(frequencyData)
@@ -264,7 +264,7 @@ function onLoad() {
         .style('stroke-width', function(d, i) { return '1px'; } )
         .style('stroke', function(d, i) { return d3.hsl((i = (i + 225) % 360), 10, .4); } )
         .style('transform', function(d, i) { return 'scale(2,2)'; } )
-      ;        
+      ;
    }
   }
 
@@ -312,7 +312,7 @@ polyButton.addEventListener('click', switchToPolys, false);
               // console.log('right key');
               switchToCircs();
               break;
-      }   
+      }
   }
 
 }
@@ -322,7 +322,7 @@ polyButton.addEventListener('click', switchToPolys, false);
 function loadAndPlay(track_url) {
 
   var client_id = "2d6ee513d9de84d2aa73eb2e5eb454a9";
-  
+
 
   SC.initialize({
       client_id: client_id
@@ -344,8 +344,3 @@ function loadAndPlay(track_url) {
   });
 
 };
-
-
-
-
-
