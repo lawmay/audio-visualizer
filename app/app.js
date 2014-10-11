@@ -10,7 +10,7 @@ var createContextClass = function() {
     window.msAudioContext
     )
   ;
-}
+};
 
 var analyser;
 
@@ -140,7 +140,7 @@ function onLoad() {
   var submitButton = document.getElementById('submit');
   submitButton.onclick = function() {
       var track_url = document.getElementById('input').value;
-      if (track_url != '') {
+      if (track_url !== '') {
         loadAndPlay(_.escape(track_url));
       }
   };
@@ -168,7 +168,7 @@ function onLoad() {
 
     currentShape = 'circ';
     currentElement = circ;
-  }
+  };
 
   var switchToRects = function() {
     clearShapes();
@@ -183,7 +183,7 @@ function onLoad() {
 
     currentShape = 'rect';
     currentElement = rect;
-  }
+  };
 
   var switchToCircs2 = function() {
     clearShapes();
@@ -198,7 +198,7 @@ function onLoad() {
 
     currentShape = 'circ2';
     currentElement = circ;
-  }
+  };
 
   var switchToPolys = function() {
     clearShapes();
@@ -213,7 +213,7 @@ function onLoad() {
 
     currentShape = 'poly';
     currentElement = poly;
-  }
+  };
 
 
   function renderFrame() {
@@ -227,7 +227,7 @@ function onLoad() {
         .attr('y',function(d, i) { return yScale(d); } )
         .attr('width', function(d, i) { return xScale.rangeBand(); } )
         .attr('height', function(d) { return h - yScale(d); } )
-        .style('fill', function(d, i) { return d3.hsl(z(i), 1, .5); } )
+        .style('fill', function(d, i) { return d3.hsl(z(i), 1, 0.5); } )
       ;
    } else if (currentShape === 'circ') {
       currentElement
@@ -235,7 +235,7 @@ function onLoad() {
         .attr('cx',function(d, i) { return xScale(i); } )
         .attr('cy',function(d, i) { return yScale(i * (w / (totalBars*5))); } )
         .attr('r',function(d, i) { return d / 1.8; } )
-        .style('fill', function(d, i) { return d3.hsl((i = (i + 1) % 360), 1, .5); } )
+        .style('fill', function(d, i) { return d3.hsl((i = (i + 1) % 360), 1, 0.5); } )
       ;
    } else if (currentShape === 'circ2') {
       currentElement
@@ -245,7 +245,7 @@ function onLoad() {
         .attr('r',function(d, i) { return d; } )
         .style('fill', function(d, i) { return 'none'; } )
         .style('stroke-width', function(d, i) { return '1px'; } )
-        .style('stroke', function(d, i) { return d3.hsl((i = (i + 90) % 360), 10, .4); } )
+        .style('stroke', function(d, i) { return d3.hsl((i = (i + 90) % 360), 10, 0.4); } )
       ;
    } else if (currentShape === 'poly') {
       currentElement
@@ -260,9 +260,9 @@ function onLoad() {
           var leftPoints = xValue + ',' + (yValue + 100);
           return topPoints + ' ' + rightPoints + ' ' + leftPoints;
         } )
-        .style('fill', function(d, i) { return d3.hsl((i = (i + 255) % 360), 10, .4); } )
+        .style('fill', function(d, i) { return d3.hsl((i = (i + 255) % 360), 10, 0.4); } )
         .style('stroke-width', function(d, i) { return '1px'; } )
-        .style('stroke', function(d, i) { return d3.hsl((i = (i + 225) % 360), 10, .4); } )
+        .style('stroke', function(d, i) { return d3.hsl((i = (i + 225) % 360), 10, 0.4); } )
         .style('transform', function(d, i) { return 'scale(2,2)'; } )
       ;
    }
@@ -336,11 +336,11 @@ function loadAndPlay(track_url) {
           console.log('inside tracks get');
           var soundCloudSrc = track.stream_url + '?client_id=' + client_id;
 
-          if (track.title != undefined) {
+          if (track.title !== undefined) {
             audio.setAttribute('src', soundCloudSrc);
             document.getElementById('song-title').innerHTML = track.title;
             audio.play();
           }
   });
 
-};
+}
