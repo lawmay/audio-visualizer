@@ -10,6 +10,6 @@ server.listen(port);
 
 
 server.get('/*', function(req, res) {
-  res.redirect('/');  
+  res.redirect('/');
 });
 
